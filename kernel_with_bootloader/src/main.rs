@@ -153,12 +153,20 @@ fn my_entry_point(boot_info: &'static mut bootloader_api::BootInfo) -> ! {
     interrupts::init();
 
     //Let's experience getting string from keyboard and saving into a variable for use
-    print!("Enter string: ");
-    let input = match input_str() {
-        Some(value) => value,
-        None => "".to_owned()
-    };
-    println!("\nString entered is '{}'", input);
+    // print!("Enter string: ");
+    // let input = match input_str() {
+    //     Some(value) => value,
+    //     None => "".to_owned()
+    // };
+    // println!("\nString entered is '{}'", input);
+
+    let returned_input = input_str!("Your prompt statement here: ");
+    if let Some(input)=returned_input{
+        println!("\nString entered is '{}'",input);
+    }else{
+        println!("\nUser didn't input");
+
+    }
 
 
     // invoke a breakpoint exception for test
